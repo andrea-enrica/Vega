@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VegaCarsApp.Persistence;
 
@@ -10,9 +11,10 @@ using VegaCarsApp.Persistence;
 namespace VegaCarsApp.Migrations
 {
     [DbContext(typeof(VegaDbContext))]
-    partial class VegaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220703154121_AddFeature")]
+    partial class AddFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,23 +39,6 @@ namespace VegaCarsApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Features");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Feature1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Feature2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Feature3"
-                        });
                 });
 
             modelBuilder.Entity("VegaCarsApp.Models.Make", b =>

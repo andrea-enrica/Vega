@@ -4,9 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<VegaDbContext>();
-builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
@@ -23,7 +22,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
-app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
