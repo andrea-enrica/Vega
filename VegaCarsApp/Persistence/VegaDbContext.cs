@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using VegaCarsApp.Models;
+using VegaCarsApp.Core.Models;
 
 namespace VegaCarsApp.Persistence
 {
@@ -46,6 +46,10 @@ namespace VegaCarsApp.Persistence
                 new Feature{ Id = 2, Name = "Feature2"},
                 new Feature{ Id = 3, Name = "Feature3"}
             );
+
+            modelBuilder.Entity<VehicleFeature>().HasKey(vf => 
+                new {vf.VehicleId, vf.FeatureId}
+            );
         }
 
         public DbSet<Make> Makes { get; set; }
@@ -53,6 +57,8 @@ namespace VegaCarsApp.Persistence
         public DbSet<Model> Models { get; set;}
 
         public DbSet<Feature> Features { get; set; }
+
+        public DbSet<Vehicle> Vehicles { get; set; }
 
     }
 }

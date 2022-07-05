@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VegaCarsApp.Controllers.DTOs;
-using VegaCarsApp.Models;
+using VegaCarsApp.Core.Models;
 using VegaCarsApp.Persistence;
 
 namespace VegaCarsApp.Controllers
