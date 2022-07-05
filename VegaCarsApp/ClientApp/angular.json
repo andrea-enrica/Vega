@@ -10,7 +10,7 @@
           "strict": true
         }
       },
-      "root": "",
+      "root": "ClientApp",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "VegaCarsApp"
+  "defaultProject": "VegaCarsApp",
+  "cli": {
+    "analytics": "5ecdac90-f1a7-493e-8736-9bff3c66255c"
+  }
 }

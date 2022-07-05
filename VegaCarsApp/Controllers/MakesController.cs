@@ -24,7 +24,6 @@ namespace VegaCarsApp.Controllers
         public async Task<IEnumerable<MakeDTO>> GetMakes()
         {
             var makes = await context.Makes.Include(m => m.Models).ToListAsync();
-            //first source type list, second target type list
             return mapper.Map<List<Make>, List<MakeDTO>>(makes);
         }
     }
