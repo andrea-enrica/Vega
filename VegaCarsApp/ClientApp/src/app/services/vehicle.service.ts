@@ -15,4 +15,8 @@ export class VehicleService {
   getFeatures() {
     return this.httpClient.get('https://localhost:7151/api/features');
   }
+
+  create(vehicle: any) {
+    return this.httpClient.post('https://localhost:7151/api/vehicles', vehicle);
+  }
 }
