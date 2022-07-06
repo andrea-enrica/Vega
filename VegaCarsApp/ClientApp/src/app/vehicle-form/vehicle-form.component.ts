@@ -1,5 +1,8 @@
 import { VehicleService } from '../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -16,11 +19,33 @@ export class VehicleFormComponent implements OnInit {
   };
 
   constructor(
-    private VehicleService: VehicleService) { }
+    private route: ActivatedRoute,
+    private router: Router, 
+    private VehicleService: VehicleService) {
+      route.params.subscribe(p=> {
+        this.vehicle.id = +p['id'] //plus in front to convert into a number
+      });
+     }
 
   ngOnInit(): void {
-    this.VehicleService.getMakes().subscribe((makes: any) => this.makes = makes);
-    this.VehicleService.getFeatures().subscribe((features: any) => this.features = features)
+    var sources = [
+      this.VehicleService.getMakes(),
+      this.VehicleService.getFeatures(),
+    ];
+
+    if(this.vehicle.id) 
+      sources.push(this.VehicleService.getVehicle(this.vehicle.id));
+
+    Observable.forkJoin(sources).subscribe((data: any) => {
+        this.makes = data[0];
+        this.features = data[1];
+
+        if(this.vehicle.id)
+          this.vehicle = data[2];
+    }, (err: any) => {
+        if(err.status == 404)
+          this.router.navigate(['/home']);
+    });
   }
 
   onMakeChange() {
@@ -44,7 +69,7 @@ export class VehicleFormComponent implements OnInit {
     } else {
       this.vehicle.isRegistered = false
     }
-    
+
     this.VehicleService.create(this.vehicle)
       .subscribe(x => console.log(x));
   }

@@ -19,4 +19,8 @@ export class VehicleService {
   create(vehicle: any) {
     return this.httpClient.post('https://localhost:7151/api/vehicles', vehicle);
   }
+
+  getVehicle(id: any) {
+    return this.httpClient.get('https://localhost:7151/api/vehicles' + id);
+  }
 }

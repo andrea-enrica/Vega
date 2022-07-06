@@ -1,11 +1,14 @@
-import { ErrorHandler, Inject, Injectable } from "@angular/core";
+import { ErrorHandler, Injectable, NgZone } from "@angular/core";
 
 @Injectable()
 export class AppErrorHandler implements ErrorHandler
 {
+    constructor(private ngZone: NgZone) {
+        
+    }
     handleError(error: any): void {
-        // this.error('An unexpected error happened.', 'Error', {
-        //     timeOut: 5000
-        // });
+        this.ngZone.run( () => {
+            alert("Error: An unexpected error happened!");
+        })
     }
 }
