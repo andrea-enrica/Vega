@@ -1,23 +1,28 @@
 import { VehicleService } from '../services/vehicle.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
-  templateUrl: 'view-vehicle.component.html'
+  templateUrl: 'view-vehicle.component.html',
 })
 export class ViewVehicleComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef;
   vehicle: any;
   vehicleId: number | undefined; 
+  photos: any[] = [];
 
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
-    private vehicleService: VehicleService) { 
+    private vehicleService: VehicleService,
+    private photoService: PhotoService,
+    ) { 
 
     route.params.subscribe(p => {
       //daca am vehicle id sa ma duca la view vehicle altfel sa ma duc la vehicle list
       this.vehicleId = p['id'];
-      if (this.vehicleId == undefined || this.vehicleId <= 0) {
+      if (this.vehicleId == undefined) {
         router.navigate(['/vehicles']);
         return; 
       }
@@ -25,6 +30,11 @@ export class ViewVehicleComponent implements OnInit {
   }
 
   ngOnInit() { 
+    this.photoService.getPhotos(this.vehicleId) 
+      .subscribe((photos: any) => {
+        this.photos = photos;
+      });
+
     this.vehicleService.getVehicle(this.vehicleId)
       .subscribe(
         v => this.vehicle = v,
@@ -36,6 +46,12 @@ export class ViewVehicleComponent implements OnInit {
         });
   }
 
+  activeTab = 'basic';
+
+  search(activeTab: string){
+    this.activeTab = activeTab;
+  }
+
   delete() {
     if (confirm("Are you sure?")) {
       this.vehicleService.delete(this.vehicle.id)
@@ -43,5 +59,14 @@ export class ViewVehicleComponent implements OnInit {
           this.router.navigate(['/vehicles']);
         });
     }
+  }
+
+  uploadPhoto() {
+    var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+
+    this.photoService.upload(this.vehicleId, nativeElement.files![0])
+      .subscribe(photo => {
+        this.photos.push(photo);
+      });
   }
 } 

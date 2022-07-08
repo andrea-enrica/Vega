@@ -1,3 +1,4 @@
+import { PhotoService } from './services/photo.service';
 // import { AppErrorHandler } from './app.error-handler';
 // import { ErrorHandler } from '@angular/core';
 import { NgModule } from '@angular/core';
@@ -44,7 +45,8 @@ import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
   ],
   providers: [
     // {provide: ErrorHandler, useClass: AppErrorHandler},
-    VehicleService
+    VehicleService,
+    PhotoService
   ],
   bootstrap: [AppComponent]
 })

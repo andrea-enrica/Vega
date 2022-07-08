@@ -15,6 +15,7 @@ namespace VegaCarsApp.Mapping
         public MappingProfile() 
         {
             //Domain to Api Resources
+            CreateMap<Photo, PhotoDTO>();
             CreateMap<Make, MakeDTO>();
             CreateMap<Make, KeyValuePairDTO>();
             CreateMap<Model, KeyValuePairDTO>();

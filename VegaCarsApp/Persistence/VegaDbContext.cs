@@ -60,5 +60,7 @@ namespace VegaCarsApp.Persistence
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
+        public DbSet<Photo> Photos { get; set; }
+
     }
 }
