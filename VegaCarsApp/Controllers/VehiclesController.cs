@@ -26,6 +26,24 @@ namespace VegaCarsApp.Controllers
             
         }
 
+        // [HttpGet]
+        // public async Task<IEnumerable<VehicleDTO>> GetVehicles(VehicleQueryDTO vehicleQueryDTO)
+        // {     
+        //     var filter = mapper.Map<VehicleQueryDTO, VehicleQuery>(vehicleQueryDTO);
+         
+        //     var vehicles = await vehicleRepository.GetVehicles(filter);
+
+        //     return mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleDTO>>(vehicles);
+        // }
+
+        [HttpGet]
+        public async Task<IEnumerable<VehicleDTO>> GetVehicles()
+        {     
+            var vehicles = await vehicleRepository.GetVehicles();
+
+            return mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleDTO>>(vehicles);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleDTO vehicleDTO) 
         {

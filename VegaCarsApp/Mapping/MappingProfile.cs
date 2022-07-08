@@ -28,6 +28,7 @@ namespace VegaCarsApp.Mapping
                 .ForMember(vDTO => vDTO.Features, operationObject => operationObject.MapFrom(v => v.Features.Select(vf => new KeyValuePairDTO {Id = vf.Feature.Id, Name = vf.Feature.Name})));
 
             //API Resource to Domain
+            CreateMap<VehicleQueryDTO, VehicleQuery>();
             CreateMap<SaveVehicleDTO, Vehicle>()
                 .ForMember(vehicle => vehicle.Id, operationObject => operationObject.Ignore())
                 .ForMember(vehicle => vehicle.ContactName, operationObject => operationObject.MapFrom(vDTO => vDTO.Contact.Name))
