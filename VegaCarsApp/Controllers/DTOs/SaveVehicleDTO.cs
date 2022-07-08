@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VegaCarsApp.Controllers.DTOs
 {
-    public partial class SaveVehicleDTO
+    public class SaveVehicleDTO
     {
 
         public int Id { get; set; }

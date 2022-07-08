@@ -23,7 +23,6 @@ namespace VegaCarsApp.Controllers
             this.UnitOfWork = unitOfWork;
             this.vehicleRepository = vehicleRepository;
             this.mapper = mapper;
-            
         }
 
         // [HttpGet]
